@@ -1,0 +1,41 @@
+{
+    "namespace": "model.registry",
+    "protocol": "Registry",
+
+    "types": [
+    {
+        "type": "record",
+        "name": "RegistryItem",
+        "fields": [
+        {
+          "name": "address",
+          "type": "string"
+        }
+        ]
+    }
+    ],
+
+    "messages":{
+        "register":{
+            "request": [{"name": "message", "type": "RegistryItem"}],
+            "response" : "null"
+        },
+        "getAll":{
+            "request": [],
+            "response": {"type": "array", "items": "RegistryItem"}
+        },
+        "unregister":{
+            "request": [{"name":"callerId", "type":"string" }],
+            "response": "boolean"
+        },
+        "aliveCheck":{
+            "request": [{"name": "registryId", "type":"string" }],
+            "response" : "boolean"
+        },
+        "getRest":{
+            "request": [{"name": "registryId", "type":"string" }],
+            "response": {"type": "array", "items": "RegistryItem"}
+        }
+
+    }
+}

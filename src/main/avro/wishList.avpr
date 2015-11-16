@@ -1,0 +1,64 @@
+{
+  "namespace": "model.wishlist",
+  "protocol": "WishList",
+  "types": [
+    {
+      "name": "WishListItem",
+      "type": "record",
+      "fields": [
+        {
+          "name": "productId",
+          "type": "string"
+        },
+        {
+          "name": "client",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "type": "record",
+      "name": "WishListEvent",
+      "fields":[
+        {
+          "name": "item",
+          "type": "WishListItem"
+        },
+        {
+          "name": "type",
+          "type":{
+            "type": "enum",
+            "name": "Event",
+            "symbols" : ["ADD","REMOVE"]
+          }
+        },
+        {
+          "name": "timestamp",
+          "type": "long"
+        }
+      ]
+    }
+  ],
+  "messages": {
+    "add": {
+      "request": [{"name": "item","type": "WishListItem"}],
+      "response": "null"
+    },
+    "remove":{
+      "request": [{"name":"item", "type": "WishListItem"}],
+      "response" : "null"
+    },
+    "items": {
+      "request": [{"name": "client", "type": "string"}],
+      "response": {"type": "array", "items": "WishListItem"}
+    },
+    "getAllFrom":{
+      "request": [{"name": "timestamp", "type": "long"}],
+      "response": {"type": "array", "items": "WishListItem" }
+    },
+    "notifyEvent":{
+      "request": [{"name": "event", "type": "Event"}],
+      "response": "null"
+    }
+  }
+}
